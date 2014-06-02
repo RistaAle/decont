@@ -1,0 +1,15 @@
+<?php
+if(isset($this->flashmsgs)) {
+    foreach($this->flashmsgs as $msg){ 
+        foreach ($msg as $key => $message) {
+            $pattern = '/^(login|register|logout)_/';
+            if(!preg_match($pattern, $key)){
+                ?>
+                <div class="<?= $key ?>-box round">
+                    <?= $message ?>
+                </div>
+              <?php
+            }
+        }
+    }
+}

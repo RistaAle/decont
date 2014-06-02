@@ -1,0 +1,56 @@
+<?php 
+$auth = Zend_Auth::getInstance();
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle('Decont UVT');
+
+echo $this->doctype(); ?>
+<html> 
+<head>
+    <?php echo $this->headMeta(); ?> 
+    <?php echo $this->headTitle(); ?>
+    <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/site.css'); ?> 
+    <?php echo $this->headScript()->appendFile('/js/jquery.js'); ?>
+    <?php echo $this->headScript()->appendFile('/js/setgetparameter.js'); ?>
+</head>
+<body>
+
+    <?php
+    if ($auth->hasIdentity()){
+        echo $this->render("header.phtml"); ?>
+        <div id="container">
+        <div id="content">
+            <?php
+                $messages = $this->render("messages.phtml");
+                $this->box_content = $messages . $this->layout()->content; 
+                echo $this->render("box.phtml"); 
+            ?>
+        </div>
+        <div id="sidebar">
+            <?php
+                $this->box_content = $this->render("sidebar.phtml");
+                echo $this->render("box.phtml");
+            ?>
+        </div>
+    </div>
+    <script>
+        // prevent multiple form submits
+        $('form').submit(function(){
+            $(this).children('input[type=submit]').prop('disabled', true);
+        });
+    </script>
+    
+    <?php
+    }
+    else{
+        ?>
+        <div id='login'>
+            <?php
+            $this->box_content = $this->render("sidebar.phtml");
+            echo $this->render("box.phtml");
+            ?>
+        </div>
+    <?php }?>
+
+</body>
+</html>

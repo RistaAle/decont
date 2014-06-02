@@ -1,0 +1,20 @@
+<div id="header">
+    <div>
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="middle">
+            <!--<a href="/about"> About</a> -->
+            <a href="/"> Home</a>
+            <a href="/document"> Documents</a>
+            <a href="/user"> Users </a>
+            <a href="/index/contact"> Contact</a>
+            <form id="search_bar" action="/document/index" method="get" onsubmit="return addSearchQuery();" name="search_form">
+                <input type="text" name="search" id="search_query"
+                    placeholder="Search for documents..." class="round default-width-input required"/>
+                <img onclick="addSearchQuery()" src="../img/icons/ic_search.png"/>
+            </form>
+
+        </div>
+        
+    </div>
+</div>

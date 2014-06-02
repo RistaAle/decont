@@ -1,0 +1,28 @@
+<?php
+    $auth = Zend_Auth::getInstance();
+    if($auth->hasIdentity()){
+        $identity = Zend_Auth::getInstance()->getIdentity();
+
+        $user_mapper = new Application_Model_UserMapper();
+        $user = $user_mapper->getUserById($identity->id);
+
+        ?>
+        <div style="display: inline-block">
+            <h4 style="padding: 5px; margin: 0px"><?= $identity->first_name . ' ' . $identity->last_name ?></h4>
+            <p style="position: relative; padding: 0px; margin: 0px; margin-left: 5px; padding-bottom: 15px">
+        </div>
+        <div class="line-separator" style="position:relative; top:-5px;"></div>
+    <?php
+    }
+?>
+
+<p class="panel_links">
+    <a href="/document/index?user=<?= $identity->id?>"><img src="../img/icons/ic_information.png" height="12px"/>My Documents</a>
+    <a href="/user/settings"><img src="../img/icons/ic_settings_b.png" height="12px"/>Account Settings</a>
+    <a href="/document/add"><img src="../img/icons/ic_upload_b.png" height="12px"/>Add Document</a>
+</p>
+
+
+<form enctype="application/x-www-form-urlencoded" action="/user/logout" method="post">                          
+    <input type="submit" value="Logout" class="round blue ic-left-arrow effect2" />
+</form>

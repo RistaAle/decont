@@ -1,0 +1,32 @@
+<?php
+    
+    $auth = Zend_Auth::getInstance();
+    if($auth->hasIdentity()){
+        echo $this->render('side_panel.phtml');
+    }
+    else{
+      echo $this->render('login.phtml');
+        
+    }
+
+    if(isset($this->flashmsgs)) {
+        foreach($this->flashmsgs as $msg){ 
+            foreach ($msg as $key => $message) {
+                if($key=="login_error" || $key=="register_error"){
+                    ?>
+                    <div class="error-box round">
+                        <?= $message ?>
+                    </div>
+                  <?php
+                }
+                else if ($key=="logout_confirmation"){
+                    ?>
+                    <div class="confirmation-box round">
+                        <?= $message ?>
+                    </div>
+                  <?php
+                }
+            }
+        }
+    }
+      
